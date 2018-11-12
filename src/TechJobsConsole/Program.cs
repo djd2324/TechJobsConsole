@@ -61,9 +61,17 @@ namespace TechJobsConsole
                     List<Dictionary<string, string>> searchResults;
 
                     // Fetch results
-                    if (columnChoice.Equals("all"))
-                    {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                    if (columnChoice.Equals("all"))                   
+                    {                        
+                        searchResults = JobData.FindByValue(searchTerm);
+                        if (searchResults.Count == 0)
+                        {
+                            Console.WriteLine("No Results Found. Please try another search.");
+                        }
+                        else
+                        {
+                            PrintJobs(searchResults);
+                        }
                     }
                     else
                     {
@@ -118,7 +126,19 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+  
+            foreach (Dictionary<string,string> record in someJobs)
+            {
+                string name = record["name"];
+                string employer = record["employer"];
+                string location = record["location"];
+                string type = record["position type"];
+                string corecompetency = record["core competency"];
+
+                // Write grouping of lines with all data seperated by * line
+                Console.WriteLine("***************" + "\n Name:{0}\n Employer: {1}\n Location:" +
+                    " {2}\n Position Type: {3}\n Skill: {4}\n", name, employer, location, type, corecompetency);
+            }
         }
     }
 }

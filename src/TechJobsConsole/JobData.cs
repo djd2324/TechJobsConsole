@@ -2,6 +2,8 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System;
+
 
 namespace TechJobsConsole
 {
@@ -56,6 +58,34 @@ namespace TechJobsConsole
             }
 
             return jobs;
+        }
+
+        //ADD FINDBYVALUE ASSIGNMENT PART 2
+        public static List<Dictionary<string, string>> FindByValue(string Value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> Collection = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> item in job)
+                {                    
+                    string aValue = item.Value.ToLower();
+                    string aSearch = Value.ToLower();
+
+                    if (Collection.Contains(job) == false)
+                    {
+                        if (aValue.Contains(aSearch))
+                        {
+                            Collection.Add(job);
+                        }
+                    }
+                }
+            }
+            return Collection;
+            //return Console.WriteLine("Nothing found");
         }
 
         /*
