@@ -76,7 +76,15 @@ namespace TechJobsConsole
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
+                        if (searchResults.Count == 0)
+                        {
+                            Console.WriteLine("No Results Found. Please try another search.");
+                        }
+                        else
+                        {
+                            PrintJobs(searchResults);
+                        }
+                        
                     }
                 }
             }
